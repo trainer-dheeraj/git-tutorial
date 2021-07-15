@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    
+    tools {nodejs "node"}
+
+    stages {
+        
+        stage('Clone') {
+            steps {
+                git branch: 'firstbranch', url: 'https://github.com/trainer-dheeraj/git-tutorial'
+            }
+        }
+        stage('Install') {
+            steps {
+                bat 'npm install'
+            }
+        }
+        stage('test') {
+            steps {
+                bat 'npm test'
+            }
+        }      
+        stage('Deploy') {
+            steps {
+                echo 'The software will now be deployed!'
+            }
+        }
+    }    
+}
