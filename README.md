@@ -1,2 +1,2 @@
 # git-tutorial
-This repo is for Git demo.
+This repo is for Github demo.
