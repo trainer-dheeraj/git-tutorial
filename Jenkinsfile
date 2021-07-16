@@ -11,7 +11,7 @@ pipeline {
         
         stage('Clone') {
             steps {
-                git branch: 'firstbranch', url: 'https://github.com/trainer-dheeraj/git-tutorial'
+                git branch: 'main', url: 'https://github.com/trainer-dheeraj/git-tutorial'
             }
         }
         stage('Install') {
