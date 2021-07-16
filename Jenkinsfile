@@ -2,6 +2,7 @@ pipeline {
     environment {
         registry = "trainerdheerajsharma/demoapp"
         registryCredential = 'docker'
+        dockerImage = ''
     }
     agent any
     
@@ -27,13 +28,21 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
             }
-        }   
+        }
         stage('Deploy') {
             steps {
-                echo 'The software will now be deployed!'
+                script {
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push()
+                }
+            }
+        }
+        stage('Verify') {
+            steps {
+                echo 'The software is now deployed!'
             }
         }
     }    
